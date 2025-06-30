@@ -1,9 +1,9 @@
 
 
 import React, { useEffect, useState } from 'react';
-import Days from './components/Days';
-import CityDisplay from './components/CityDisplay';
-import CitySearch from './components/CitySearch';
+import Days from './components/Days.jsx';
+import CityDisplay from './components/CityDisplay.jsx';
+import CitySearch from './components/CitySearch.jsx';
 import './App.css';
 
 // Access the API key from environment variables
@@ -11,7 +11,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 
 // Function to get daily forecasts from the weather data
 const getDailyForecasts = (list) => {
-  const result = [];
+
   const map = new Map();
 
   for (const entry of list) {
@@ -28,7 +28,7 @@ const getDailyForecasts = (list) => {
 
 // Main App component 
 function App() {
-  const [city, setCity] = useState('Kisumu'); // Default city
+  const [city, setCity] = useState('Kisumu'); 
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
   const [days, setDays] = useState([]);
@@ -66,6 +66,22 @@ function App() {
   useEffect(() => {
     fetchWeather('Kisumu');
   }, []);
+   
+   useEffect(() => {
+    if (!weather) return;
+
+    // Get the main weather condition (e.g., "Clear", "Clouds", "Rain")
+    const weatherCondition = weather.list[0].weather[0].main.toLowerCase();
+    
+    // Get the icon name to determine if it's day or night
+    const icon = weather.list[0].weather[0].icon;
+    const isDay = !icon.endsWith('n'); 
+
+    // Set the CSS classes on the body element
+    document.body.className = ''; // Clear previous classes
+    document.body.classList.add(isDay ? 'day' : 'night');
+    document.body.classList.add(weatherCondition);
+  }, [weather]); // This effect runs whenever the 'weather' state changes
 
   return (
     <div className='app-container'>
