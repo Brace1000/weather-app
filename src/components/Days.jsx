@@ -1,7 +1,6 @@
-// src/components/Days.jsx
 
 import React from "react";
-import './Days.css';
+
 
 const Days = ({ days }) => {
   if (!days || days.length === 0) return null;

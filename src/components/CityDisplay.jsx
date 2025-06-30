@@ -1,7 +1,5 @@
-// src/components/CityDisplay.jsx
 
 import React from "react";
-import './CityDisplay.css';
 
 const CityDisplay = ({ city, today }) => {
   if (!city || !today) return null;

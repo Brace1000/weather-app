@@ -1,7 +1,6 @@
-// src/components/CitySearch.jsx
 
 import React from "react";
-import './CitySearch.css';
+
 
 const CitySearch = ({ city, onCityChange, onSearch }) => {
   return (
